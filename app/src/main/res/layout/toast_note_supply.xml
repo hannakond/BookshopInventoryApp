@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container_toast_supply"
+    style="@style/RelativeDefault">
+
+    <TextView
+        android:id="@+id/infoTextToast"
+        style="@style/ToastPersonalised"
+        android:text="@string/note_order">
+
+    </TextView>
+
+    <ImageView
+        style="@style/ImageToastPersonalised"
+        android:background="@drawable/stock_disponsible"
+        android:src="@drawable/supplier">
+
+    </ImageView>
+
+</RelativeLayout>

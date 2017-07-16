@@ -1,0 +1,476 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="RelativeDefault">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:focusableInTouchMode">true</item>
+    </style>
+
+    <style name="ListView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:divider">@color/colorAccent</item>
+        <item name="android:dividerHeight">2dp</item>
+    </style>
+
+    <style name="ImageEmptyView">
+        <item name="android:layout_width">150dp</item>
+        <item name="android:layout_height">150dp</item>
+        <item name="android:layout_marginTop">35dp</item>
+        <item name="android:layout_marginBottom">20dp</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:src">@drawable/store</item>
+    </style>
+
+    <style name="TextEmptyView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_below">@id/photo_empty_view</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif-smallcaps</item>
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.SearchResult.Title</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:text">@string/text_empty_view</item>
+    </style>
+
+    <style name="NewProductIconEmptyView">
+        <item name="android:layout_width">25dp</item>
+        <item name="android:layout_height">25dp</item>
+        <item name="android:src">@drawable/new_product</item>
+        <item name="android:layout_below">@id/text_empty_view</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_marginTop">5dp</item>
+    </style>
+
+    <style name="StyleFb">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:layout_marginBottom">16dp</item>
+        <item name="android:src">@drawable/new_product</item>
+    </style>
+    <style name="Fab">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:layout_marginBottom">16dp</item>
+        <item name="android:src">@drawable/new_product</item>
+    </style>
+    <style name="ScrollView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:focusableInTouchMode">true</item>
+    </style>
+
+    <style name="TextInfoPhoto">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Small</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif-smallcaps</item>
+        <item name="android:text">@string/info_change_photo</item>
+    </style>
+
+    <style name="AddProductImage">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:minHeight">220dp</item>
+        <item name="android:layout_height">220dp</item>
+        <item name="android:layout_below">@id/instructions_img</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:src">@drawable/new_image</item>
+        <item name="android:scaleType">fitXY</item>
+    </style>
+
+    <style name="ViewProductPhotoEdition">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">2dp</item>
+        <item name="android:background">@color/colorAccent</item>
+        <item name="android:layout_below">@id/image_product</item>
+    </style>
+
+    <style name="TextImageProduct">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">16dp</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_below">@id/image_product</item>
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Small</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif-smallcaps</item>
+        <item name="android:text">@string/text_product_image</item>
+    </style>
+
+    <style name="ProductNumber">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_below">@id/text_image_product</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Medium</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif-smallcaps</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:text">@string/product_number</item>
+    </style>
+
+    <style name="EditTextNumber">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_below">@id/text_image_product</item>
+        <item name="android:layout_toRightOf">@id/nombre_producto_tv</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginTop">22dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Medium</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif-smallcaps</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:hint">@string/new_product</item>
+        <item name="android:textColorHint">@color/colorHint</item>
+        <item name="android:textAlignment">textEnd</item>
+        <item name="android:inputType">textPersonName</item>
+        <item name="android:maxLength">12</item>
+    </style>
+
+    <style name="ProductPrice">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_below">@id/nombre_producto_tv</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginTop">32dp</item>
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Medium</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif-smallcaps</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:text">@string/product_price</item>
+    </style>
+
+    <style name="EditTextPrice">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_below">@id/textview_product_name</item>
+        <item name="android:layout_toRightOf">@id/precio_producto</item>
+        <item name="android:layout_marginLeft">27dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:hint">@string/hint_price</item>
+        <item name="android:inputType">numberDecimal</item>
+        <item name="android:textColorHint">@color/colorHint</item>
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Medium</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAlignment">textEnd</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:fontFamily">sans-serif-smallcaps</item>
+    </style>
+
+    <style name="Supplier">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_below">@id/precio_producto</item>
+        <item name="android:layout_margin">16dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Medium</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif-smallcaps</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:text">@string/supplier</item>
+    </style>
+
+    <style name="EditTextSupplier">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_below">@id/textview_text_price</item>
+        <item name="android:layout_toRightOf">@id/supplier</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_marginLeft">69dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:hint">@string/hint_supplier</item>
+        <item name="android:inputType">textPersonName</item>
+        <item name="android:textColorHint">@color/colorHint</item>
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Medium</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAlignment">textEnd</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:fontFamily">sans-serif-smallcaps</item>
+        <item name="android:maxLength">12</item>
+    </style>
+
+    <style name="Quantity">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_below">@id/supplier</item>
+        <item name="android:layout_margin">16dp</item>
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Medium</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif-smallcaps</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:text">@string/quantity</item>
+    </style>
+
+    <style name="EditTextQuantity">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_below">@id/textview_text_provider</item>
+        <item name="android:layout_toRightOf">@id/product_quantity</item>
+        <item name="android:layout_marginLeft">80dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:hint">@string/hint_quantity</item>
+        <item name="android:inputType">number</item>
+        <item name="android:textColorHint">@color/colorHint</item>
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Medium</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAlignment">textEnd</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:fontFamily">sans-serif-smallcaps</item>
+    </style>
+
+    <style name="TextScreenManage">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">sans-serif-smallcaps</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="InfoTextScreenManage">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:gravity">end</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Medium</item>
+        <item name="android:fontFamily">sans-serif-smallcaps</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+    <style name="QuantityView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">2dp</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:layout_below">@id/textview_ventas</item>
+    </style>
+
+    <style name="EditText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Medium</item>
+        <item name="android:fontFamily">sans-serif-smallcaps</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:layout_below">@id/view_quantity</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:text">@string/change_text</item>
+    </style>
+
+    <style name="QuantityButtons">
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_margin">16dp</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:layout_below">@id/product_quantity</item>
+        <item name="android:textSize">25sp</item>
+    </style>
+
+    <style name="ManageTextQuantity">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_below">@id/product_quantity</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_toRightOf">@id/restart_stock</item>
+        <item name="android:layout_toLeftOf">@id/sum_stock</item>
+        <item name="android:hint">@string/hint_quantity</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:inputType">number</item>
+        <item name="android:textColorHint">@color/colorHint</item>
+    </style>
+
+    <style name="Merchandise">
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_below">@id/quantity</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:src">@drawable/supplier</item>
+    </style>
+
+    <style name="ViewImageTop">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">2dp</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:layout_below">@id/supplier_merchandise</item>
+    </style>
+
+    <style name="PhotoProductManageScreen">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">290dp</item>
+        <item name="android:minHeight">290dp</item>
+        <item name="android:layout_below">@id/view_img_top</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:src">@drawable/new_image</item>
+        <item name="android:onClick">avisoCambioImagen</item>
+    </style>
+
+    <style name="ViewBottomPhotoProduct">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">2dp</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:layout_below">@id/image_product</item>
+    </style>
+
+    <style name="LinearListView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="ProductImageListView">
+        <item name="android:layout_width">100dp</item>
+        <item name="android:layout_height">130dp</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:layout_gravity">start</item>
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+    <style name="ViewImageListView">
+        <item name="android:layout_width">2dp</item>
+        <item name="android:layout_height">130dp</item>
+        <item name="android:background">@color/colorAccent</item>
+    </style>
+
+    <style name="ProductQuantityListView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:fontFamily">sans-serif-smallcaps</item>
+        <item name="android:textColor">@color/colorAppDark</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="StockProductListView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:background">@drawable/stock_disponsible</item>
+        <item name="android:fontFamily">serif-monospace</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ViewProductQuantityListView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_below">@id/product_name</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:layout_toLeftOf">@id/quantity</item>
+        <item name="android:background">@color/colorAccent</item>
+    </style>
+
+    <style name="PriceProductListView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_below">@id/product_name</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:fontFamily">serif-monospace</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textStyle">bold|italic</item>
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Small</item>
+    </style>
+
+    <style name="SupplierListView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_below">@id/price</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:fontFamily">serif-monospace</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textStyle">bold|italic</item>
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Small</item>
+    </style>
+
+    <style name="SalesProduct">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_marginBottom">4dp</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:fontFamily">sans-serif-smallcaps</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textStyle">bold</item>5
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="BuyButton">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_marginBottom">6dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:background">@drawable/buttonbg</item>
+        <item name="android:src">@drawable/buy_product</item>
+    </style>
+
+    <style name="ToastPersonalised">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:paddingBottom">50dp</item>
+        <item name="android:layout_margin">16dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:fontFamily">sans-serif-smallcaps</item>
+        <item name="android:background">@drawable/buttonbg</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Light.SearchResult.Title</item>
+        <item name="android:text">@string/change_image_text</item>
+    </style>
+
+    <style name="ImageToastPersonalised">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:src">@drawable/buttonbg</item>
+        <item name="android:layout_alignBottom">@id/infoTextToast</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_marginBottom">2dp</item>
+    </style>
+</resources>
