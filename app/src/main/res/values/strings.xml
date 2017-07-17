@@ -33,7 +33,7 @@
         <string name="permission">You need permission to access the device images.</string>
         <string name="product_price">Product Price:</string>
         <string name="product">Product:</string>
-        <string name="product_delete">Deleted product</string>
+        <string name="product_delete">Delete the product</string>
         <string name="product_dummy">Add a dummy</string>
         <string name="product_new">Great news everyone: more wonderful books have just arrived! Check out this bestseller, it\'s a must read!:)</string>
         <string name="supplier">Supplier:</string>

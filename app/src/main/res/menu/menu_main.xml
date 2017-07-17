@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/producto_ficticio"
+        android:id="@+id/product_dummy"
         android:title="@string/product_dummy" />
 
     <item

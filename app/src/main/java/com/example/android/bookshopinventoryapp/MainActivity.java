@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 Toast.makeText(this, R.string.expected, Toast.LENGTH_SHORT)
                         .show();
                 return true;
-            case R.id.producto_ficticio:
+            case R.id.product_dummy:
                 addDummy();
                 return true;
             case R.id.delete_all:

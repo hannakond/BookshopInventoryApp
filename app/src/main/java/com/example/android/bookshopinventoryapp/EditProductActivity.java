@@ -281,7 +281,7 @@ public class EditProductActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_edicion_producto, menu);
+        getMenuInflater().inflate(R.menu.menu_edit_products, menu);
         return true;
     }
 

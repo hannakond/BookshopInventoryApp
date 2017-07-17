@@ -144,7 +144,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_below">@id/text_image_product</item>
-        <item name="android:layout_toRightOf">@id/nombre_producto_tv</item>
+        <item name="android:layout_toRightOf">@id/product_number_tv</item>
         <item name="android:layout_marginLeft">16dp</item>
         <item name="android:layout_marginTop">22dp</item>
         <item name="android:layout_marginRight">16dp</item>
@@ -162,7 +162,7 @@
     <style name="ProductPrice">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_below">@id/nombre_producto_tv</item>
+        <item name="android:layout_below">@id/product_number_tv</item>
         <item name="android:layout_marginLeft">16dp</item>
         <item name="android:layout_marginTop">32dp</item>
         <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Medium</item>
@@ -176,7 +176,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_below">@id/textview_product_name</item>
-        <item name="android:layout_toRightOf">@id/precio_producto</item>
+        <item name="android:layout_toRightOf">@id/product_price</item>
         <item name="android:layout_marginLeft">27dp</item>
         <item name="android:layout_marginTop">10dp</item>
         <item name="android:layout_marginRight">16dp</item>
@@ -193,7 +193,7 @@
     <style name="Supplier">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_below">@id/precio_producto</item>
+        <item name="android:layout_below">@id/product_price</item>
         <item name="android:layout_margin">16dp</item>
         <item name="android:paddingTop">4dp</item>
         <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Medium</item>
@@ -235,7 +235,6 @@
     </style>
 
     <style name="EditTextQuantity">
-        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_below">@id/textview_text_provider</item>
         <item name="android:layout_toRightOf">@id/product_quantity</item>
@@ -279,7 +278,7 @@
         <item name="android:layout_marginRight">16dp</item>
         <item name="android:layout_marginTop">5dp</item>
         <item name="android:background">@color/colorPrimary</item>
-        <item name="android:layout_below">@id/textview_ventas</item>
+        <item name="android:layout_below">@id/text_view_sales</item>
     </style>
 
     <style name="EditText">
@@ -302,7 +301,7 @@
         <item name="android:layout_margin">16dp</item>
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:layout_below">@id/product_quantity</item>
-        <item name="android:textSize">25sp</item>
+        <item name="android:textSize">10sp</item>
     </style>
 
     <style name="ManageTextQuantity">
@@ -394,14 +393,25 @@
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textStyle">bold</item>
     </style>
-
+    <style name="TextoCambiante">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Medium</item>
+        <item name="android:fontFamily">sans-serif-smallcaps</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:layout_below">@id/view_quantity</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:text">@string/quantity</item>
+    </style>
     <style name="ViewProductQuantityListView">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">1dp</item>
-        <item name="android:layout_below">@id/product_name</item>
-        <item name="android:layout_marginLeft">5dp</item>
-        <item name="android:layout_marginRight">5dp</item>
-        <item name="android:layout_toLeftOf">@id/quantity</item>
+        <item name="android:layout_height">2dp</item>
+        <item name="android:layout_below">@id/textview_ventas</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:layout_marginTop">5dp</item>
         <item name="android:background">@color/colorAccent</item>
     </style>
 

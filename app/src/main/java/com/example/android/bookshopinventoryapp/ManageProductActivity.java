@@ -62,7 +62,7 @@ public class ManageProductActivity extends AppCompatActivity implements LoaderCa
         numberProd = (TextView) findViewById(R.id.tv_product_name);
         priceProd = (TextView) findViewById(R.id.textview_text_price);
         supplierProd = (TextView) findViewById(R.id.textview_text_provider);
-        salesProd = (TextView) findViewById(R.id.ventas_producto);
+        salesProd = (TextView) findViewById(R.id.sales_product);
         stockProd = (EditText) findViewById(R.id.quantity);
         Button buttonRestart = (Button) findViewById(R.id.restart_stock);
         Button buttonSum = (Button) findViewById(R.id.sum_stock);
@@ -100,7 +100,7 @@ public class ManageProductActivity extends AppCompatActivity implements LoaderCa
         });
     }
 
-    private void UpdateStockProduct() {
+    private void updateStockProduct() {
         if (request != false) {
             String quantity = stockProd.getText().toString();
 
@@ -156,9 +156,9 @@ public class ManageProductActivity extends AppCompatActivity implements LoaderCa
             }
         }
         if (quantity < 10) {
-            int restaStock = quantity - quantity;
-            String stockActualizado = String.valueOf(restaStock);
-            stockProd.setText(stockActualizado);
+            int restartStock = quantity - quantity;
+            String stockRestart = String.valueOf(restartStock);
+            stockProd.setText(stockRestart);
             clicks++;
 
             if (clicks % 2 == 1) {
@@ -216,7 +216,7 @@ public class ManageProductActivity extends AppCompatActivity implements LoaderCa
         builder.append("PRODUCT: " + product + "\n");
         builder.append("QUANTITY: " + stockRequest + "\n");
         builder.append("\nThanks in advance and best regards.");
-        String requesr = builder.toString();
+        String request = builder.toString();
 
         Intent intentStock = new Intent(Intent.ACTION_SEND);
         intentStock.setData(Uri.parse("mailto:"));
@@ -229,7 +229,7 @@ public class ManageProductActivity extends AppCompatActivity implements LoaderCa
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_gestion_productos, menu);
+        getMenuInflater().inflate(R.menu.menu_manage_products, menu);
         return true;
     }
 
@@ -237,14 +237,13 @@ public class ManageProductActivity extends AppCompatActivity implements LoaderCa
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.edit_product_attributes:
-                ModificarCamposProducto();
-                finish();
+                modifyProductFields();
                 return true;
             case R.id.saved_stock:
-                UpdateStockProduct();
+                updateStockProduct();
                 return true;
             case R.id.action_share:
-                CompartirProducto();
+                shareProduct();
                 return true;
             case R.id.home:
                 NavUtils.navigateUpFromSameTask(this);
@@ -253,29 +252,28 @@ public class ManageProductActivity extends AppCompatActivity implements LoaderCa
         return super.onOptionsItemSelected(item);
     }
 
-    private void CompartirProducto() {
+    private void shareProduct() {
         String product = numberProd.getText().toString();
         String supplier = supplierProd.getText().toString();
         String price = priceProd.getText().toString();
 
-        StringBuilder builderProductoNuevo = new StringBuilder();
-        builderProductoNuevo.append(PRODUCT_NEW + " \n\n"
+        StringBuilder builderNewProduct = new StringBuilder();
+        builderNewProduct.append(PRODUCT_NEW + " \n\n"
                 + product + "\n" + supplier + "\n" + price);
 
-        String algo = builderProductoNuevo.toString();
+        String smth = builderNewProduct.toString();
 
         Intent intentShare = new Intent(Intent.ACTION_SEND);
         intentShare.setType("text/plain");
         intentShare.putExtra(Intent.EXTRA_SUBJECT, "New Product");
-        intentShare.putExtra(Intent.EXTRA_TEXT, algo);
+        intentShare.putExtra(Intent.EXTRA_TEXT, smth);
         startActivity(Intent.createChooser(intentShare, "Share a New Product"));
     }
 
-    private void ModificarCamposProducto() {
+    private void modifyProductFields() {
         Intent intent = new Intent(ManageProductActivity.this, EditProductActivity.class);
-        Uri currentProductUri = ContentUris.withAppendedId(ProductEntry.CONTENT_URI,
-                ContentUris.parseId(this.currentProductUri));
-        intent.setData(currentProductUri);
+        intent.setData(ContentUris.withAppendedId(ProductEntry.CONTENT_URI,
+                       ContentUris.parseId(this.currentProductUri)));
         startActivity(intent);
         finish();
     }
