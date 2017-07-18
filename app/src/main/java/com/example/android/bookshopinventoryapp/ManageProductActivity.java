@@ -26,7 +26,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.example.android.bookshopinventoryapp.Data.ProductContract.ProductEntry;
 import com.squareup.picasso.Picasso;
 
@@ -182,8 +181,8 @@ public class ManageProductActivity extends AppCompatActivity implements LoaderCa
 
     private void SumStock() {
         quantity = Integer.parseInt(stockProd.getText().toString());
-        int algo = quantity + 10;
-        String sum = String.valueOf(algo);
+        int smth = quantity + 10;
+        String sum = String.valueOf(smth);
         stockProd.setText(sum);
         clicks++;
 
@@ -212,7 +211,7 @@ public class ManageProductActivity extends AppCompatActivity implements LoaderCa
 
         StringBuilder builder = new StringBuilder();
         builder.append("Greetings " + supplier + " :\n");
-        builder.append("I would like to rder the following products:\n");
+        builder.append("I would like to order the following products:\n");
         builder.append("PRODUCT: " + product + "\n");
         builder.append("QUANTITY: " + stockRequest + "\n");
         builder.append("\nThanks in advance and best regards.");

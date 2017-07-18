@@ -33,34 +33,25 @@ import java.io.File;
 public class EditProductActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    private static final int EXISTING_PRODUCT_LOADER = 0;
-
-    private Uri currentProductUri;
-
-    private ImageView imageViewP;
-
-    private EditText editTextNameP;
-
-    private EditText editTextPriceP;
-
-    private EditText editTextSupplier;
-
-    private EditText editTextQuantity;
-
     public static final int PHOTO_REQUEST_CODE = 20;
-
     public static final int EXTERNAL_STORAGE_REQUEST_PERMISSION_CODE = 21;
-
+    private static final int EXISTING_PRODUCT_LOADER = 0;
+    private Uri currentProductUri;
+    private ImageView imageViewP;
+    private EditText editTextNameP;
+    private EditText editTextPriceP;
+    private EditText editTextSupplier;
+    private EditText editTextQuantity;
     private String currentPhotoUri = "no image";
 
-    private int filasEliminadas = 0;
+    private int deletedRows = 0;
 
-    private boolean datosProductoCambiado = false;
+    private boolean productDataChanged = false;
 
     private View.OnTouchListener mTouchListener = new View.OnTouchListener() {
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
-            datosProductoCambiado = true;
+            productDataChanged = true;
             return false;
         }
     };
@@ -76,17 +67,17 @@ public class EditProductActivity extends AppCompatActivity
         editTextPriceP = (EditText) findViewById(R.id.textview_text_price);
         editTextSupplier = (EditText) findViewById(R.id.textview_text_supplier);
         editTextQuantity = (EditText) findViewById(R.id.quantity);
-        TextView textoFoto = (TextView) findViewById(R.id.text_image_product);
-        final TextView instrucionesFoto = (TextView) findViewById(R.id.instructions_img);
-        View viewSeparadorImagen = findViewById(R.id.view_spacer);
+        TextView textPhoto = (TextView) findViewById(R.id.text_image_product);
+        final TextView instructionsPhoto = (TextView) findViewById(R.id.instructions_img);
+        View viewImageTab = findViewById(R.id.view_spacer);
 
         scrollview.fullScroll(ScrollView.FOCUS_UP);
 
         imageViewP.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                datosProductoCambiado = true;
-                instrucionesFoto.setVisibility(View.GONE);
+                productDataChanged = true;
+                instructionsPhoto.setVisibility(View.GONE);
                 return false;
             }
         });
@@ -98,7 +89,7 @@ public class EditProductActivity extends AppCompatActivity
         imageViewP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                actualizarFotoProducto(v);
+                updateProductPhoto(v);
             }
         });
 
@@ -107,16 +98,16 @@ public class EditProductActivity extends AppCompatActivity
 
         if (currentProductUri == null) {
             setTitle(getString(R.string.title_activity_new_product));
-            textoFoto.setVisibility(View.VISIBLE);
-            viewSeparadorImagen.setVisibility(View.GONE);
+            textPhoto.setVisibility(View.VISIBLE);
+            viewImageTab.setVisibility(View.GONE);
             invalidateOptionsMenu();
 
         } else {
             setTitle(getString(R.string.title_activity_modify_product));
-            textoFoto.setVisibility(View.GONE);
-            instrucionesFoto.setVisibility(View.GONE);
+            textPhoto.setVisibility(View.GONE);
+            instructionsPhoto.setVisibility(View.GONE);
             editTextNameP.setHintTextColor(getResources().getColor(R.color.colorHint));
-            viewSeparadorImagen.setVisibility(View.VISIBLE);
+            viewImageTab.setVisibility(View.VISIBLE);
             getLoaderManager().initLoader(EXISTING_PRODUCT_LOADER, null, this);
         }
     }
@@ -145,7 +136,7 @@ public class EditProductActivity extends AppCompatActivity
     private void deleteProduct() {
         if (currentProductUri != null) {
             int rowsDeleted = getContentResolver().delete(currentProductUri, null, null);
-            if (filasEliminadas == 0) {
+            if (deletedRows == 0) {
                 Toast.makeText(this, R.string.delete_product, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(EditProductActivity.this, MainActivity.class);
                 startActivity(intent);
@@ -155,7 +146,8 @@ public class EditProductActivity extends AppCompatActivity
             finish();
         }
     }
-    private void mostrarDialogoCancelarCambios(
+
+    private void showDialogCancelChanges(
             DialogInterface.OnClickListener discardButtonClickListener) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.discard_changes);
@@ -173,7 +165,7 @@ public class EditProductActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        if (!datosProductoCambiado) {
+        if (!productDataChanged) {
             super.onBackPressed();
             return;
         }
@@ -184,19 +176,20 @@ public class EditProductActivity extends AppCompatActivity
                         finish();
                     }
                 };
-        mostrarDialogoCancelarCambios(discardButtonClickListener);
+        showDialogCancelChanges(discardButtonClickListener);
     }
-    public void actualizarFotoProducto(View view) {
+
+    public void updateProductPhoto(View view) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) ==
                     PackageManager.PERMISSION_GRANTED) {
-                eleccionFotoProducto();
+                selectProductPhoto();
             } else {
-                String[] permisionRequest = {Manifest.permission.READ_EXTERNAL_STORAGE};
-                requestPermissions(permisionRequest, EXTERNAL_STORAGE_REQUEST_PERMISSION_CODE);
+                String[] permissionRequest = {Manifest.permission.READ_EXTERNAL_STORAGE};
+                requestPermissions(permissionRequest, EXTERNAL_STORAGE_REQUEST_PERMISSION_CODE);
             }
         } else {
-            eleccionFotoProducto();
+            selectProductPhoto();
         }
     }
 
@@ -205,23 +198,23 @@ public class EditProductActivity extends AppCompatActivity
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == EXTERNAL_STORAGE_REQUEST_PERMISSION_CODE && grantResults[0] ==
                 PackageManager.PERMISSION_GRANTED) {
-            eleccionFotoProducto();
+            selectProductPhoto();
         } else {
             Toast.makeText(this, R.string.permission, Toast.LENGTH_LONG).show();
         }
     }
 
-    private void eleccionFotoProducto() {
-        Intent selectorFoto = new Intent(Intent.ACTION_PICK);
+    private void selectProductPhoto() {
+        Intent photoSelector = new Intent(Intent.ACTION_PICK);
 
-        File directorioFoto = Environment.getExternalStoragePublicDirectory
+        File photoDirectory = Environment.getExternalStoragePublicDirectory
                 (Environment.DIRECTORY_PICTURES);
-        String pictureDirectoryPath = directorioFoto.getPath();
+        String pictureDirectoryPath = photoDirectory.getPath();
         Uri data = Uri.parse(pictureDirectoryPath);
 
-        selectorFoto.setDataAndType(data, "image/*");
+        photoSelector.setDataAndType(data, "image/*");
 
-        startActivityForResult(selectorFoto, PHOTO_REQUEST_CODE);
+        startActivityForResult(photoSelector, PHOTO_REQUEST_CODE);
     }
 
     @Override
