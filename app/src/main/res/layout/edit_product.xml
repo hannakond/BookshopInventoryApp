@@ -51,8 +51,9 @@
         <EditText
             android:id="@+id/quantity"
             style="@style/EditTextQuantity"
-            android:layout_width="wrap_content" />
-
+            android:layout_width="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/textview_text_supplier" />
     </RelativeLayout>
-
 </ScrollView>

@@ -99,7 +99,6 @@
             android:layout_below="@+id/view_img_top"
             android:adjustViewBounds="false"
             android:cropToPadding="false"
-            android:onClick="noteImageChanges"
             android:scaleType="fitEnd" />
 
         <View style="@style/ViewBottomPhotoProduct" />

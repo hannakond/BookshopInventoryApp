@@ -14,12 +14,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.android.bookshopinventoryapp.R;
 import com.example.android.bookshopinventoryapp.Data.ProductContract.ProductEntry;
 import com.squareup.picasso.Picasso;
 
 public class ProductCursorAdapter extends CursorAdapter {
-
     public ProductCursorAdapter(Context context, Cursor c) {
         super(context, c, 0);
     }
@@ -31,32 +29,31 @@ public class ProductCursorAdapter extends CursorAdapter {
 
     @Override
     public void bindView(View view, final Context context, final Cursor cursor) {
-
-        ImageView imageViewProduct = (ImageView) view.findViewById(R.id.image_product);
-        TextView textViewNameP = (TextView) view.findViewById(R.id.product_name);
-        TextView textViewPriceP = (TextView) view.findViewById(R.id.price);
-        TextView textViewSupplierP = (TextView) view.findViewById(R.id.product_supplier);
-        TextView textViewQuantityP = (TextView) view.findViewById(R.id.quantity);
+        final ImageView imageViewProduct = (ImageView) view.findViewById(R.id.image_product);
+        final TextView textViewNameP = (TextView) view.findViewById(R.id.product_name);
+        final TextView textViewPriceP = (TextView) view.findViewById(R.id.price);
+        final TextView textViewSupplierP = (TextView) view.findViewById(R.id.product_supplier);
+        final TextView textViewQuantityP = (TextView) view.findViewById(R.id.quantity);
         final TextView totalSalesProduct = (TextView) view.findViewById(R.id.text_view_sales);
-        ImageView buttonBuyProduct = (ImageView) view.findViewById(R.id.buy_button);
+        final ImageView buttonBuyProduct = (ImageView) view.findViewById(R.id.buy_button);
 
-        int pictureColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_IMAGE_PRODUCT);
-        int nameColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_NAME_PRODUCT);
+        final int pictureColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_IMAGE_PRODUCT);
+        final int nameColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_NAME_PRODUCT);
         final int priceColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_PRICE_PRODUCT);
-        int supplierColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_PROVIDER_PRODUCT);
-        int quantityColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_QUANTITY_PRODUCT);
-        int salesColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_PRODUCT_SALES);
+        final int supplierColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_PROVIDER_PRODUCT);
+        final int quantityColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_QUANTITY_PRODUCT);
+        final int salesColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_PRODUCT_SALES);
 
-        int id = cursor.getInt(cursor.getColumnIndex(ProductEntry._ID));
-        Uri productPicture = Uri.parse(cursor.getString(pictureColumnIndex));
+        final int id = cursor.getInt(cursor.getColumnIndex(ProductEntry._ID));
+        final Uri productPicture = Uri.parse(cursor.getString(pictureColumnIndex));
         final String productName = cursor.getString(nameColumnIndex);
         final double pricePvp = cursor.getDouble(priceColumnIndex);
-        String productPrice = "PFP: " + cursor.getString(priceColumnIndex) + " €";
-        String productSupplier = cursor.getString(supplierColumnIndex);
+        final String productPrice = "PFP: " + cursor.getString(priceColumnIndex) + " €";
+        final String productSupplier = cursor.getString(supplierColumnIndex);
         final int quantity = cursor.getInt(quantityColumnIndex);
         final double salesTotalProductValue = cursor.getDouble(salesColumnIndex);
-        String productQuantity = "Stock\n" + cursor.getString(quantityColumnIndex);
-        String salesTotalProduct = "Sales: " + cursor.getString(salesColumnIndex) + " €";
+        final String productQuantity = "Stock\n" + cursor.getString(quantityColumnIndex);
+        final String salesTotalProduct = "Sales: " + cursor.getString(salesColumnIndex) + " €";
 
         final Uri currentProductUri = ContentUris.withAppendedId(ProductEntry.CONTENT_URI, id);
 
@@ -68,7 +65,6 @@ public class ProductCursorAdapter extends CursorAdapter {
 
         Picasso.with(context).load(productPicture)
                 .placeholder(R.drawable.new_image)
-
                 .fit()
                 .into(imageViewProduct);
 

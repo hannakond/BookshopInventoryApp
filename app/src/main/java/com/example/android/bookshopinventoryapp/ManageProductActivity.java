@@ -63,8 +63,8 @@ public class ManageProductActivity extends AppCompatActivity implements LoaderCa
         supplierProd = (TextView) findViewById(R.id.textview_text_provider);
         salesProd = (TextView) findViewById(R.id.sales_product);
         stockProd = (EditText) findViewById(R.id.quantity);
-        Button buttonRestart = (Button) findViewById(R.id.restart_stock);
-        Button buttonSum = (Button) findViewById(R.id.sum_stock);
+        final Button buttonRestart = (Button) findViewById(R.id.restart_stock);
+        final Button buttonSum = (Button) findViewById(R.id.sum_stock);
         imageProd = (ImageView) findViewById(R.id.image_product);
         supplierRequest = (ImageView) findViewById(R.id.supplier_merchandise);
         quantityProd = (TextView) findViewById(R.id.product_quantity);
@@ -78,7 +78,7 @@ public class ManageProductActivity extends AppCompatActivity implements LoaderCa
             @Override
             public void onClick(View v) {
                 quantityProd.setText(getString(R.string.request_quantity));
-                UpdateStock();
+                updateStock();
             }
         });
 
@@ -101,9 +101,9 @@ public class ManageProductActivity extends AppCompatActivity implements LoaderCa
 
     private void updateStockProduct() {
         if (request != false) {
-            String quantity = stockProd.getText().toString();
+            final String quantity = stockProd.getText().toString();
 
-            ContentValues values = new ContentValues();
+            final ContentValues values = new ContentValues();
             values.put(ProductEntry.COLUMN_QUANTITY_PRODUCT, quantity);
 
             if (currentProductUri != null) {
@@ -120,11 +120,11 @@ public class ManageProductActivity extends AppCompatActivity implements LoaderCa
                 }
             }
         } else {
-            LayoutInflater inflater = getLayoutInflater();
-            View layout = inflater.inflate(R.layout.toast_note_supply,
+            final LayoutInflater inflater = getLayoutInflater();
+            final View layout = inflater.inflate(R.layout.toast_note_supply,
                     (ViewGroup) findViewById(R.id.container_toast_supply));
-            //Toast
-            Toast toast = new Toast(getApplicationContext());
+
+            final Toast toast = new Toast(getApplicationContext());
             toast.setGravity(Gravity.CLIP_HORIZONTAL, 0, 0);
             toast.setDuration(Toast.LENGTH_LONG);
             toast.setView(layout);
@@ -132,11 +132,11 @@ public class ManageProductActivity extends AppCompatActivity implements LoaderCa
         }
     }
 
-    private void UpdateStock() {
+    private void updateStock() {
         quantity = Integer.parseInt(stockProd.getText().toString());
         if (quantity >= 10) {
-            int updateStock = quantity - 10;
-            String stockUpdate = String.valueOf(updateStock);
+            final int updateStock = quantity - 10;
+            final String stockUpdate = String.valueOf(updateStock);
             stockProd.setText(stockUpdate);
             clicks ++;
 
@@ -155,8 +155,8 @@ public class ManageProductActivity extends AppCompatActivity implements LoaderCa
             }
         }
         if (quantity < 10) {
-            int restartStock = quantity - quantity;
-            String stockRestart = String.valueOf(restartStock);
+            final int restartStock = quantity - quantity;
+            final String stockRestart = String.valueOf(restartStock);
             stockProd.setText(stockRestart);
             clicks++;
 
@@ -165,7 +165,7 @@ public class ManageProductActivity extends AppCompatActivity implements LoaderCa
                         .make(getCurrentFocus(), R.string.note,
                                 Snackbar.LENGTH_LONG)
                         .setActionTextColor(getResources().getColor(R.color.colorStock));
-                View snackbarView = snackbar.getView();
+                final View snackbarView = snackbar.getView();
                 snackbarView.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
                 snackbar.setAction(R.string.ok, new View.OnClickListener() {
                     @Override
@@ -181,8 +181,8 @@ public class ManageProductActivity extends AppCompatActivity implements LoaderCa
 
     private void SumStock() {
         quantity = Integer.parseInt(stockProd.getText().toString());
-        int smth = quantity + 10;
-        String sum = String.valueOf(smth);
+        final int smth = quantity + 10;
+        final String sum = String.valueOf(smth);
         stockProd.setText(sum);
         clicks++;
 
@@ -197,27 +197,26 @@ public class ManageProductActivity extends AppCompatActivity implements LoaderCa
                 @Override
                 public void onClick(View v) {
                 }
-            })
-                    .show();
+            }).show();
         }
     }
 
     private void supplierRequest() {
-        String product = numberProd.getText().toString();
-        String supplier = supplierProd.getText().toString();
-        String supplierAddress = "www." + supplier + ".eu";
-        String[] destination = {supplierAddress};
-        String stockRequest = stockProd.getText().toString();
+        final String product = numberProd.getText().toString();
+        final String supplier = supplierProd.getText().toString();
+        final String supplierAddress = "www." + supplier + ".eu";
+        final String[] destination = {supplierAddress};
+        final String stockRequest = stockProd.getText().toString();
 
-        StringBuilder builder = new StringBuilder();
+        final StringBuilder builder = new StringBuilder();
         builder.append("Greetings " + supplier + " :\n");
         builder.append("I would like to order the following products:\n");
         builder.append("PRODUCT: " + product + "\n");
         builder.append("QUANTITY: " + stockRequest + "\n");
         builder.append("\nThanks in advance and best regards.");
-        String request = builder.toString();
+        final String request = builder.toString();
 
-        Intent intentStock = new Intent(Intent.ACTION_SEND);
+        final Intent intentStock = new Intent(Intent.ACTION_SEND);
         intentStock.setData(Uri.parse("mailto:"));
         intentStock.setType("text/plain");
         intentStock.putExtra(Intent.EXTRA_EMAIL, destination);
@@ -252,17 +251,17 @@ public class ManageProductActivity extends AppCompatActivity implements LoaderCa
     }
 
     private void shareProduct() {
-        String product = numberProd.getText().toString();
-        String supplier = supplierProd.getText().toString();
-        String price = priceProd.getText().toString();
+        final String product = numberProd.getText().toString();
+        final String supplier = supplierProd.getText().toString();
+        final String price = priceProd.getText().toString();
 
-        StringBuilder builderNewProduct = new StringBuilder();
+        final StringBuilder builderNewProduct = new StringBuilder();
         builderNewProduct.append(PRODUCT_NEW + " \n\n"
                 + product + "\n" + supplier + "\n" + price);
 
-        String smth = builderNewProduct.toString();
+        final String smth = builderNewProduct.toString();
 
-        Intent intentShare = new Intent(Intent.ACTION_SEND);
+        final Intent intentShare = new Intent(Intent.ACTION_SEND);
         intentShare.setType("text/plain");
         intentShare.putExtra(Intent.EXTRA_SUBJECT, "New Product");
         intentShare.putExtra(Intent.EXTRA_TEXT, smth);
@@ -270,7 +269,7 @@ public class ManageProductActivity extends AppCompatActivity implements LoaderCa
     }
 
     private void modifyProductFields() {
-        Intent intent = new Intent(ManageProductActivity.this, EditProductActivity.class);
+        final Intent intent = new Intent(ManageProductActivity.this, EditProductActivity.class);
         intent.setData(ContentUris.withAppendedId(ProductEntry.CONTENT_URI,
                        ContentUris.parseId(this.currentProductUri)));
         startActivity(intent);
@@ -278,7 +277,7 @@ public class ManageProductActivity extends AppCompatActivity implements LoaderCa
     }
 
     private void showDialogRequestMerchandise() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.supplier_request);
         builder.setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
@@ -293,14 +292,14 @@ public class ManageProductActivity extends AppCompatActivity implements LoaderCa
             }
         });
 
-        AlertDialog alertDialog = builder.create();
+        final AlertDialog alertDialog = builder.create();
         alertDialog.setTitle("REQUEST SUPPLY");
         alertDialog.show();
     }
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        String[] projection = {
+        final String[] projection = {
                 ProductEntry._ID,
                 ProductEntry.COLUMN_IMAGE_PRODUCT,
                 ProductEntry.COLUMN_NAME_PRODUCT,
@@ -319,19 +318,19 @@ public class ManageProductActivity extends AppCompatActivity implements LoaderCa
         }
 
         if (cursor.moveToFirst()) {
-            int imageColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_IMAGE_PRODUCT);
-            int nameColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_NAME_PRODUCT);
-            int priceColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_PRICE_PRODUCT);
-            int providerColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_PROVIDER_PRODUCT);
-            int quantityColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_QUANTITY_PRODUCT);
-            int salesColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_PRODUCT_SALES);
+            final int imageColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_IMAGE_PRODUCT);
+            final int nameColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_NAME_PRODUCT);
+            final int priceColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_PRICE_PRODUCT);
+            final int providerColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_PROVIDER_PRODUCT);
+            final int quantityColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_QUANTITY_PRODUCT);
+            final int salesColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_PRODUCT_SALES);
 
-            String name = cursor.getString(nameColumnIndex);
-            float price = cursor.getFloat(priceColumnIndex);
-            String provider = cursor.getString(providerColumnIndex);
-            int quantity = cursor.getInt(quantityColumnIndex);
+            final String name = cursor.getString(nameColumnIndex);
+            final float price = cursor.getFloat(priceColumnIndex);
+            final String provider = cursor.getString(providerColumnIndex);
+            final int quantity = cursor.getInt(quantityColumnIndex);
             currentPhotoUri = cursor.getString(imageColumnIndex);
-            double pvp = cursor.getDouble(salesColumnIndex);
+            final double pvp = cursor.getDouble(salesColumnIndex);
 
             numberProd.setText(name);
             priceProd.setText(String.valueOf(price) + " €");
@@ -354,17 +353,4 @@ public class ManageProductActivity extends AppCompatActivity implements LoaderCa
         salesProd.setText("");
         quantityProd.setText(R.string.stock_correct);
     }
-
-    public void noteQuantityImage (View view) {
-        LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate(R.layout.toast_note_change_image,
-                (ViewGroup) findViewById(R.id.container_toast));
-        Toast toast = new Toast(getApplicationContext());
-        toast.setGravity(Gravity.CLIP_HORIZONTAL, 0, 0);
-        toast.setDuration(Toast.LENGTH_SHORT);
-        toast.setView(layout);
-        toast.show();
-
-    }
-
 }

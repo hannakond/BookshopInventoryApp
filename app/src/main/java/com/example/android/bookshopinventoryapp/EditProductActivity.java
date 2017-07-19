@@ -61,15 +61,15 @@ public class EditProductActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_product);
 
-        ScrollView scrollview = (ScrollView) findViewById(R.id.scrollview);
+        final ScrollView scrollview = (ScrollView) findViewById(R.id.scrollview);
         imageViewP = (ImageView) findViewById(R.id.image_product);
         editTextNameP = (EditText) findViewById(R.id.textview_product_name);
         editTextPriceP = (EditText) findViewById(R.id.textview_text_price);
         editTextSupplier = (EditText) findViewById(R.id.textview_text_supplier);
         editTextQuantity = (EditText) findViewById(R.id.quantity);
-        TextView textPhoto = (TextView) findViewById(R.id.text_image_product);
+        final TextView textPhoto = (TextView) findViewById(R.id.text_image_product);
         final TextView instructionsPhoto = (TextView) findViewById(R.id.instructions_img);
-        View viewImageTab = findViewById(R.id.view_spacer);
+        final View viewImageTab = findViewById(R.id.view_spacer);
 
         scrollview.fullScroll(ScrollView.FOCUS_UP);
 
@@ -93,7 +93,7 @@ public class EditProductActivity extends AppCompatActivity
             }
         });
 
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         currentProductUri = intent.getData();
 
         if (currentProductUri == null) {
@@ -101,7 +101,6 @@ public class EditProductActivity extends AppCompatActivity
             textPhoto.setVisibility(View.VISIBLE);
             viewImageTab.setVisibility(View.GONE);
             invalidateOptionsMenu();
-
         } else {
             setTitle(getString(R.string.title_activity_modify_product));
             textPhoto.setVisibility(View.GONE);
@@ -113,7 +112,7 @@ public class EditProductActivity extends AppCompatActivity
     }
 
     private void showDeleteConfirmationDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.delete_dialog_msg);
         builder.setPositiveButton(R.string.action_delete, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
@@ -128,17 +127,17 @@ public class EditProductActivity extends AppCompatActivity
             }
         });
 
-        AlertDialog alertDialog = builder.create();
+        final AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
 
 
     private void deleteProduct() {
         if (currentProductUri != null) {
-            int rowsDeleted = getContentResolver().delete(currentProductUri, null, null);
+            getContentResolver().delete(currentProductUri, null, null);
             if (deletedRows == 0) {
                 Toast.makeText(this, R.string.delete_product, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(EditProductActivity.this, MainActivity.class);
+                final Intent intent = new Intent(EditProductActivity.this, MainActivity.class);
                 startActivity(intent);
             } else {
                 Toast.makeText(this, R.string.error_cleaning_product, Toast.LENGTH_SHORT).show();
@@ -149,7 +148,7 @@ public class EditProductActivity extends AppCompatActivity
 
     private void showDialogCancelChanges(
             DialogInterface.OnClickListener discardButtonClickListener) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.discard_changes);
         builder.setPositiveButton(R.string.discard, discardButtonClickListener);
         builder.setNegativeButton(R.string.continue_editing, new DialogInterface.OnClickListener() {
@@ -159,7 +158,7 @@ public class EditProductActivity extends AppCompatActivity
                 }
             }
         });
-        AlertDialog alertDialog = builder.create();
+        final AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
 
@@ -205,12 +204,12 @@ public class EditProductActivity extends AppCompatActivity
     }
 
     private void selectProductPhoto() {
-        Intent photoSelector = new Intent(Intent.ACTION_PICK);
+        final Intent photoSelector = new Intent(Intent.ACTION_PICK);
 
-        File photoDirectory = Environment.getExternalStoragePublicDirectory
+        final File photoDirectory = Environment.getExternalStoragePublicDirectory
                 (Environment.DIRECTORY_PICTURES);
-        String pictureDirectoryPath = photoDirectory.getPath();
-        Uri data = Uri.parse(pictureDirectoryPath);
+        final String pictureDirectoryPath = photoDirectory.getPath();
+        final Uri data = Uri.parse(pictureDirectoryPath);
 
         photoSelector.setDataAndType(data, "image/*");
 
@@ -220,29 +219,30 @@ public class EditProductActivity extends AppCompatActivity
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == PHOTO_REQUEST_CODE && resultCode == RESULT_OK) {
-            if (data != null) {
+            if (data == null) {
+                return;
             }
-            Uri mProductPhotoUri = data.getData();
-            currentPhotoUri = mProductPhotoUri.toString();
+            final Uri productPhotoUri = data.getData();
+            currentPhotoUri = productPhotoUri.toString();
 
-            Picasso.with(this).load(mProductPhotoUri)
+            Picasso.with(this).load(productPhotoUri)
                     .placeholder(R.drawable.new_image)
                     .fit()
                     .into(imageViewP);
         }
     }
 
-    private void AddNewProduct() {
-        String number = editTextNameP.getText().toString();
-        String price = editTextPriceP.getText().toString();
-        String supplier = editTextSupplier.getText().toString();
-        String quantity = editTextQuantity.getText().toString();
+    private void addNewProduct() {
+        final String number = editTextNameP.getText().toString();
+        final String price = editTextPriceP.getText().toString();
+        final String supplier = editTextSupplier.getText().toString();
+        final String quantity = editTextQuantity.getText().toString();
 
         if (number.isEmpty() || price.isEmpty() || supplier.isEmpty() || quantity.isEmpty()) {
             Toast.makeText(this, R.string.reneval, Toast.LENGTH_SHORT).show();
             return;
         }
-        ContentValues values = new ContentValues();
+        final ContentValues values = new ContentValues();
         values.put(ProductEntry.COLUMN_IMAGE_PRODUCT, currentPhotoUri);
         values.put(ProductEntry.COLUMN_NAME_PRODUCT, number);
         values.put(ProductEntry.COLUMN_PRICE_PRODUCT, price);
@@ -251,17 +251,14 @@ public class EditProductActivity extends AppCompatActivity
         values.put(ProductEntry.COLUMN_PRODUCT_SALES, 0.0);
 
         if (currentProductUri == null) {
-
             Uri insertedRow = getContentResolver().insert(ProductEntry.CONTENT_URI, values);
-
             if (insertedRow == null) {
                 Toast.makeText(this, R.string.error_saving_changes, Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(this, R.string.total, Toast.LENGTH_LONG).show();
             }
         } else {
-            int rowUpdated = getContentResolver().update(currentProductUri, values, null, null);
-
+            final int rowUpdated = getContentResolver().update(currentProductUri, values, null, null);
             if (rowUpdated == 0) {
                 Toast.makeText(this, R.string.error_saving_changes, Toast.LENGTH_LONG).show();
             } else {
@@ -282,23 +279,22 @@ public class EditProductActivity extends AppCompatActivity
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
-         if (currentProductUri == null) {
-            MenuItem menuItem = menu.findItem(R.id.delete_product);
+        if (currentProductUri == null) {
+            final MenuItem menuItem = menu.findItem(R.id.delete_product);
             menuItem.setVisible(false);
         }
-          if (currentProductUri != null) {
-            MenuItem menuItem = menu.findItem(R.id.saved_product);
+        if (currentProductUri != null) {
+            final MenuItem menuItem = menu.findItem(R.id.saved_product);
             menuItem.setIcon(R.drawable.ic_done_white_18dp);
         }
         return true;
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.saved_product:
-                AddNewProduct();
+                addNewProduct();
                 finish();
                 return true;
             case R.id.delete_product:
@@ -310,7 +306,7 @@ public class EditProductActivity extends AppCompatActivity
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        String[] projection = {
+        final String[] projection = {
                 ProductEntry._ID,
                 ProductEntry.COLUMN_IMAGE_PRODUCT,
                 ProductEntry.COLUMN_NAME_PRODUCT,
@@ -334,16 +330,16 @@ public class EditProductActivity extends AppCompatActivity
         }
 
         if (cursor.moveToFirst()) {
-            int imageColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_IMAGE_PRODUCT);
-            int nameColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_NAME_PRODUCT);
-            int priceColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_PRICE_PRODUCT);
-            int providerColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_PROVIDER_PRODUCT);
-            int quantityColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_QUANTITY_PRODUCT);
+            final int imageColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_IMAGE_PRODUCT);
+            final int nameColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_NAME_PRODUCT);
+            final int priceColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_PRICE_PRODUCT);
+            final int providerColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_PROVIDER_PRODUCT);
+            final int quantityColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_QUANTITY_PRODUCT);
 
-            String name = cursor.getString(nameColumnIndex);
-            float price = cursor.getFloat(priceColumnIndex);
-            String provider = cursor.getString(providerColumnIndex);
-            int quantity = cursor.getInt(quantityColumnIndex);
+            final String name = cursor.getString(nameColumnIndex);
+            final float price = cursor.getFloat(priceColumnIndex);
+            final String provider = cursor.getString(providerColumnIndex);
+            final int quantity = cursor.getInt(quantityColumnIndex);
             currentPhotoUri = cursor.getString(imageColumnIndex);
 
             editTextNameP.setText(name);

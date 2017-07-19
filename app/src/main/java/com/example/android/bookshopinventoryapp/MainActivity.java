@@ -14,9 +14,9 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -26,7 +26,7 @@ import com.example.android.bookshopinventoryapp.Data.ProductContract.ProductEntr
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    ProductCursorAdapter mCursorAdapter;
+    ProductCursorAdapter cursorAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +34,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         setContentView(R.layout.activity_main);
 
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-
-        ListView productListView = (ListView) findViewById(R.id.list_product);
+        final ListView productListView = (ListView) findViewById(R.id.list_product);
 
         productListView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
@@ -58,11 +57,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             }
         });
 
-        View emptyView = findViewById(R.id.empty_view);
+        final View emptyView = findViewById(R.id.empty_view);
         productListView.setEmptyView(emptyView);
 
-        mCursorAdapter = new ProductCursorAdapter(this, null);
-        productListView.setAdapter(mCursorAdapter);
+        cursorAdapter = new ProductCursorAdapter(this, null);
+        productListView.setAdapter(cursorAdapter);
 
         productListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -77,20 +76,20 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     private void addDummy() {
-        ContentValues values = new ContentValues();
+        final ContentValues values = new ContentValues();
         values.put(ProductEntry.COLUMN_NAME_PRODUCT, "New Product");
         values.put(ProductEntry.COLUMN_PRICE_PRODUCT, "1.5");
         values.put(ProductEntry.COLUMN_PROVIDER_PRODUCT, "New Provider");
         values.put(ProductEntry.COLUMN_QUANTITY_PRODUCT, 10);
         values.put(ProductEntry.COLUMN_PRODUCT_SALES, 0.0);
 
-        Uri newUri = getContentResolver().insert(ProductEntry.CONTENT_URI, values);
+        getContentResolver().insert(ProductEntry.CONTENT_URI, values);
 
         Toast.makeText(this, R.string.note_wrong_product, Toast.LENGTH_SHORT).show();
     }
 
     private void showDeleteConfirmationDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.clean);
         builder.setPositiveButton(R.string.action_delete, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
@@ -106,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             }
         });
 
-        AlertDialog alertDialog = builder.create();
+        final AlertDialog alertDialog = builder.create();
         alertDialog.setTitle("DELETE LIST FOR SURE");
         alertDialog.show();
     }
@@ -117,9 +116,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         return true;
     }
 
-
     private void deleteAllProducts() {
-        int rowsDeleted = getContentResolver().delete(ProductEntry.CONTENT_URI, null, null);
+        final int rowsDeleted = getContentResolver().delete(ProductEntry.CONTENT_URI, null, null);
         Log.v("CatalogActivity", rowsDeleted + " rows deleted from pet database");
     }
 
@@ -157,11 +155,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onLoadFinished(android.content.Loader<Cursor> loader, Cursor data) {
-        mCursorAdapter.swapCursor(data);
+        cursorAdapter.swapCursor(data);
     }
 
     @Override
     public void onLoaderReset(android.content.Loader<Cursor> loader) {
-        mCursorAdapter.swapCursor(null);
+        cursorAdapter.swapCursor(null);
     }
 }
